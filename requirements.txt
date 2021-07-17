@@ -1,0 +1,3 @@
+kubernetes==17.17.0
+requests==2.26.0
+retrying==1.3.3
