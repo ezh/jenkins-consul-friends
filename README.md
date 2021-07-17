@@ -1,0 +1,1 @@
+# jenkins-consul-friends
