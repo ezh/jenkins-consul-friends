@@ -16,7 +16,7 @@ WAIT_TIMEOUT_SEC: int = 5 * 60
 WAIT_SLEEP_SEC: int = 5
 
 # Initialization & basic validation
-logging.basicConfig(level=logging.NOTSET)
+logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.NOTSET)
 logging.getLogger("kubernetes").setLevel(logging.INFO)
 logger = logging.getLogger("main")
 logger.setLevel(logging.DEBUG)
