@@ -7,6 +7,10 @@ Key points:
 * Start a Jenkins server container in the Kubernetes
 * Create 2 CI CD jenkins jobs inside the Jenkins. The CI job creates a docker image out of it and save it on the local host. The CD job starts the saved docker image created in the CI job, and will result with a running docker container on the localhost
 
+## Structure
+
+![alt text](demo/jcf.png) "Components"
+
 ## Requirements
 
 Kubernetes development cluster (microk8s, minikube, kops, eks, gks, aks, etc.)
@@ -21,7 +25,7 @@ You might set the following environment variables for convenience:
 * JENKINS_UI_PORT
 * JENKINS_AGENT_PORT
 * CONSUL_UI_PORT
-* CONSUL_DNS_PORT"
+* CONSUL_DNS_PORT
 
 
 ```
