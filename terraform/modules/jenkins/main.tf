@@ -8,6 +8,7 @@ locals {
         "credentials:2.5",
         "git-server:1.10",
         "groovy",
+        "job-dsl:1.77",
         "junit:1.51",
         "pipeline-model-api:1.8.5",
         "pipeline-model-definition:1.8.5",
@@ -18,12 +19,12 @@ locals {
       ],
       agentListenerPort = var.jenkins_agent_port
       jenkinsUrl        = "http://localhost:${var.jenkins_ui_port}"
-      initScripts       = [file("${path.module}/init.groovy")]
+      initScripts       = [file("${path.module}/job_ci.groovy")]
       JCasC = {
         enabled       = true
         defaultConfig = true
         configScripts = {
-          jenkins = yamlencode({
+          init = yamlencode({
             jenkins = {
               systemMessage = "Welcome to Jenkins & Consul & Friends",
               nodes = [{
@@ -43,7 +44,11 @@ locals {
                   retentionStrategy = "always"
                 }
               }]
-            }
+            },
+            jobs = [
+              { script : "folder('JenkinsConsulFriends') {}" },
+              { script : file("${path.module}/job_cd.groovy") }
+            ]
           })
         }
       }

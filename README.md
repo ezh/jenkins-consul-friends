@@ -9,7 +9,7 @@ Key points:
 
 ## Structure
 
-![alt text](demo/jcf.png) "Components"
+![alt text](demo/jcf.png) Components
 
 ## Requirements
 

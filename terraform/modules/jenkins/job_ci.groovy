@@ -38,33 +38,23 @@ def createMultibranchScm(folder, name, repo, credentialsId, jobScript) {
   job
 }
 
-if (instance.getItem('JenkinsConsulFriends') == null) {
-  println('=== Initialize the JenkinsConsulFriends folder')
-  def folder = instance.createProject(Folder, 'JenkinsConsulFriends')
-  folder.description = 'Jenkins & Consul & Friends jobs'
-
-  ci_job = createMultibranchScm(folder, 'CI',
-    'https://github.com/ezh/jenkins-consul-friends.git', null, 'ci.Jenkinsfile')
-  ci_job.description = 'Build Jenkins & Consul & Friends microservice'
-  ci_job.displayName = 'JenkinsConsulFriends CI'
-  ci_job.with {
-    newInterval = new PeriodicFolderTrigger('1m')
-    addTrigger(newInterval)
-    sourcesList.each {
-      namedBranch = new NamedBranchBuildStrategyImpl([
-              new NamedBranchBuildStrategyImpl.ExactNameFilter('main', false)
-            ])
-      strategyList = [namedBranch] as List<BranchBuildStrategy>
-      it.setBuildStrategies(strategyList)
-    }
+println('=== Initialize the JenkinsConsulFriends folder')
+folder = instance.createProject(Folder, 'JenkinsConsulFriends')
+folder.description = 'Jenkins & Consul & Friends jobs'
+ci_job = createMultibranchScm(folder, 'CI',
+  'https://github.com/ezh/jenkins-consul-friends.git', null, 'ci.Jenkinsfile')
+ci_job.description = 'Build Jenkins & Consul & Friends microservice'
+ci_job.displayName = 'JenkinsConsulFriends CI'
+ci_job.with {
+  newInterval = new PeriodicFolderTrigger('1m')
+  addTrigger(newInterval)
+  sourcesList.each {
+    namedBranch = new NamedBranchBuildStrategyImpl([
+            new NamedBranchBuildStrategyImpl.ExactNameFilter('main', false)
+          ])
+    strategyList = [namedBranch] as List<BranchBuildStrategy>
+    it.setBuildStrategies(strategyList)
   }
-  ci_job.save()
-
-  cd_job = createMultibranchScm(folder, 'CD',
-    'https://github.com/ezh/jenkins-consul-friends.git', null, 'cd.Jenkinsfile')
-  cd_job.description = 'Deploy Jenkins & Consul & Friends microservice'
-  cd_job.displayName = 'JenkinsConsulFriends CD'
-  cd_job.save()
 }
-
+ci_job.save()
 instance.save()

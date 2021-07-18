@@ -14,7 +14,7 @@ pipeline {
     }
     stage('Trigger CD') {
       steps {
-        build(job: 'JenkinsConsulFriends/CD/main', wait: false,
+        build(job: 'JenkinsConsulFriends/JenkinsConsulFriends CD', wait: false,
           parameters: [string(name: 'image_tag', value: "${COMMIT}-${env.BUILD_NUMBER}")])
       }
     }
