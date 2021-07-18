@@ -7,6 +7,8 @@ Key points:
 * Start a Jenkins server container in the Kubernetes
 * Create 2 CI CD jenkins jobs inside the Jenkins. The CI job creates a docker image out of it and save it on the local host. The CD job starts the saved docker image created in the CI job, and will result with a running docker container on the localhost
 
+![alt text](demo/jenkins-consul-friends.gif) The process took about 5 minutes at my workplace. This animated gif is nearly 1-minute length.
+
 ## Structure
 
 ![alt text](demo/jcf.png) Components
